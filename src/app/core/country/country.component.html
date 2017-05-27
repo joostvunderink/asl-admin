@@ -1,0 +1,15 @@
+<h1>Countries</h1>
+
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>code</th>
+            <th>name</th>
+        </tr>
+
+        <tr *ngFor="let country of countries">
+            <td>{{ country.code }}</td>
+            <td>{{ country.name }}</td>
+        </tr>
+    </table>
+</div>
