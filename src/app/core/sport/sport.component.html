@@ -1,0 +1,24 @@
+<h1>Sports</h1>
+
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr *ngFor="let sport of (sports|async)">
+            <td>{{ sport.name }}</td>
+            <td><a (click)="deleteSport(sport.$key)">Delete</a></td>
+        </tr>
+    </table>
+
+    <form (ngSubmit)="onSubmit()" #sportForm="ngForm" class="form-inline">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" required [(ngModel)]="newSport.name">
+      </div>
+      <button type="submit" class="btn btn-success">Add new sport</button>
+    </form>
+
+</div>
