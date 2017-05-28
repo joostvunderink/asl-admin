@@ -3,13 +3,28 @@
 <div>
     <table class="table table-striped">
         <tr>
-            <th>code</th>
-            <th>name</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Actions</th>
         </tr>
 
-        <tr *ngFor="let country of countries">
+        <tr *ngFor="let country of (countries|async)">
             <td>{{ country.code }}</td>
             <td>{{ country.name }}</td>
+            <td><a (click)="deleteCountry(country.$key)">Delete</a></td>
         </tr>
     </table>
+
+    <form (ngSubmit)="onSubmit()" #countryForm="ngForm" class="form-inline">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" required [(ngModel)]="newCountry.name">
+      </div>
+      <div class="form-group">
+        <label for="code">Code</label>
+        <input type="text" class="form-control" name="code" required [(ngModel)]="newCountry.code">
+      </div>
+      <button type="submit" class="btn btn-success">Add new country</button>
+    </form>
+
 </div>
