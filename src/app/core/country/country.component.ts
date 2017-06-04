@@ -9,7 +9,7 @@ import { ICountry } from './country.interface';
 })
 export class CountryComponent {
     countries: FirebaseListObservable<ICountry[]>;
-    newCountry: ICountry = { name: '', code: '' };
+    newCountry: ICountry = { name: '', code: '', $key: '', sports: {} };
 
     constructor(private countryService: CountryService) {
         this.countries = this.countryService.getCountries();
