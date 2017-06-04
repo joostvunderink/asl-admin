@@ -16,7 +16,7 @@ import { AppComponent }             from './app.component';
 import { CountryComponent }         from './core/country/country.component';
 import { SportComponent }           from './core/sport/sport.component';
 import { SportPerCountryComponent } from './core/sport/sport-per-country.component';
-import { DashboardComponent }       from './dashboard/dashboard.component';
+// import { DashboardComponent }       from './dashboard/dashboard.component';
 
 const appRoutes: Routes = [
   { path: 'countries',         component: CountryComponent },
