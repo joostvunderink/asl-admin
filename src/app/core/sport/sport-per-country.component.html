@@ -1,0 +1,34 @@
+<h1>Sports per country</h1>
+
+<div>
+
+    <select class="form-control" [(ngModel)]="selectedCountry" name="country" (change)="countrySelect()" required>
+        <option selected>Select a country</option>
+        <option [ngValue]="country" *ngFor="let country of (countries | async)">{{country.name}} ({{country.code}})</option>
+    </select>
+
+</div>
+<div *ngIf="selectedCountry">
+
+    <table class="table table-striped">
+        <tr>
+            <th>Active</th>
+            <th>Name</th>
+        </tr>
+
+        <tr *ngFor="let sport of (sports|async)">
+            <td><input type="checkbox" [(checked)]="selectedCountry.sports && selectedCountry.sports[sport.$key]" (change)="sportToggle(sport, $event)"></td>
+            <td>{{ sport.name }} {{ sport.$key }}</td>
+        </tr>
+    </table>
+
+</div>
+
+<div>
+    <table>
+        <tr><!--  *ngFor="let spc in (sportsPerCountry|async)"> -->
+            <td>{{ sportsPerCountry }}</td>
+        </tr>
+
+    </table>
+</div>
