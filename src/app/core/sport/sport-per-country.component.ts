@@ -13,9 +13,8 @@ import { ICountry }       from '../country/country.interface';
 export class SportPerCountryComponent {
     countries: FirebaseListObservable<ICountry[]>;
     sports: FirebaseListObservable<ISport[]>;
-    sportsPerCountry: FirebaseListObservable<any[]>;
     selectedCountry: ICountry;
-
+    selectedCountryKey: string;
 
     constructor(private sportService: SportService, private countryService: CountryService) {
         this.sports = this.sportService.getSports();
@@ -23,31 +22,23 @@ export class SportPerCountryComponent {
     }
 
     countrySelect() {
-        console.log('country select', this.selectedCountry.code, this.selectedCountry.$key);
-        this.sportsPerCountry = this.sportService.getSportsPerCountry(this.selectedCountry.$key);
-        this.sportsPerCountry.subscribe(
-            value => console.log('value', value),
-
-        );
+        // TODO: Figure out what's going on here: why do we need 2 forEach loops inside
+        // each other?
+        this.countries.forEach((countries) => {
+            countries.forEach((c) => {
+                if (c.$key === this.selectedCountryKey) {
+                    this.selectedCountry = c;
+                }    
+            });
+        });
     }
 
     sportToggle(sport, $event) {
-        console.log('sportToggle');
-        console.log(this.selectedCountry);
-        console.log($event.target.checked);
         if ($event.target.checked) {
-            this.sportService.addSportToCountry(this.selectedCountry.$key, sport.$key);
+            this.sportService.addSportToCountry(this.selectedCountryKey, sport.$key);
         }
         else {
-            this.sportService.removeSportFromCountry(this.selectedCountry.$key, sport.$key);
+            this.sportService.removeSportFromCountry(this.selectedCountryKey, sport.$key);
         }
-
-    }
-
-    deleteSport(key: string) {
-        this.sportService.removeSport(key);
-    }
-
-    onSubmit() {
     }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { ICountry } from './country.interface';
 
 @Injectable()
@@ -8,6 +8,10 @@ export class CountryService {
 
     constructor(db: AngularFireDatabase) {
         this._db = db;
+    }
+
+    getCountry(key): FirebaseObjectObservable<any> {
+        return this._db.object('/countries/' + key);
     }
 
     getCountries(): FirebaseListObservable<ICountry[]> {
