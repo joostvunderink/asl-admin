@@ -9,7 +9,7 @@ import { ISport } from './sport.interface';
 })
 export class SportComponent {
     sports: FirebaseListObservable<ISport[]>;
-    newSport: ISport = { name: '' };
+    newSport: ISport = { name: '', $key: '' };
 
     constructor(private sportService: SportService) {
         this.sports = this.sportService.getSports();

@@ -19,7 +19,9 @@ export class CountryService {
     }
 
     addCountry(country: ICountry) {
-        this._db.list('/countries').push(country);
+        const o = country;
+        delete o.$key;
+        this._db.list('/countries').push(o);
     }
 
     removeCountry(key: string) {

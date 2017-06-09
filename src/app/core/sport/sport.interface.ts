@@ -1,5 +1,6 @@
 export interface ISport {
     name: string;
+    $key: string;
 }
 
 export interface ISportPerCountry {

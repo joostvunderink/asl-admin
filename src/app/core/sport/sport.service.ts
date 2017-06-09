@@ -15,7 +15,9 @@ export class SportService {
     }
 
     addSport(sport: ISport) {
-        this._db.list('/sports').push(sport);
+        const o = sport;
+        delete o.$key;
+        this._db.list('/sports').push(o);
     }
 
     removeSport(key: string) {

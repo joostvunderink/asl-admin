@@ -1,0 +1,45 @@
+<h1>Countries</h1>
+
+<div>
+  <div class="col-sm-6">
+    <select class="form-control" [(ngModel)]="selectedCountryKey" name="country" (change)="countrySelect()" required>
+        <option selected>Select a country</option>
+        <option [ngValue]="country.$key" *ngFor="let country of (countries | async)">{{country.name}} ({{country.code}})</option>
+    </select>
+  </div>
+  <div class="col-sm-6">
+    <select class="form-control" [(ngModel)]="selectedSportKey" name="sport" (change)="sportSelect()" required>
+        <option selected>Select a sport</option>
+        <option [ngValue]="sport.$key" *ngFor="let sport of (sports | async)">{{sport.name}}</option>
+    </select>
+  </div>
+</div>
+
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr *ngFor="let region of (regions|async)">
+            <td>{{ region.name }}</td>
+            <td>{{ region.description }}</td>
+            <td><a (click)="deleteRegion(region.$key)">Delete</a></td>
+        </tr>
+    </table>
+
+    <form (ngSubmit)="onSubmit()" #countryForm="ngForm" class="form-inline">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" required [(ngModel)]="newRegion.name">
+      </div>
+      <div class="form-group">
+        <label for="code">Description</label>
+        <input type="text" class="form-control" name="code" required [(ngModel)]="newRegion.description">
+      </div>
+      <button type="submit" class="btn btn-success">Add new region</button>
+    </form>
+
+</div>
