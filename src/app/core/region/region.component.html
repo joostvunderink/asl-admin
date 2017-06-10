@@ -1,13 +1,13 @@
 <h1>Regions</h1>
 
-<div>
-  <div class="col-sm-6">
+<div class="row">
+  <div class="col-sm-3 col-sm-offset-6">
     <select class="form-control" [(ngModel)]="selectedCountryKey" name="country" (change)="countrySelect()" required>
         <option selected>Select a country</option>
         <option [ngValue]="country.$key" *ngFor="let country of (countries | async)">{{country.name}} ({{country.code}})</option>
     </select>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-3">
     <select class="form-control" [(ngModel)]="selectedSportKey" name="sport" (change)="sportSelect()" required>
         <option selected>Select a sport</option>
         <option [ngValue]="sport.$key" *ngFor="let sport of (sports | async)">{{sport.name}}</option>
@@ -15,8 +15,9 @@
   </div>
 </div>
 
-<div>
-    <table class="table table-striped">
+<div class="row" style="margin-top: 20px;">
+  <div class="col-sm-12">
+    <table class="table table-striped" *ngIf="(regions|async)?.length">
         <tr>
             <th>Name</th>
             <th>Description</th>
@@ -30,6 +31,12 @@
         </tr>
     </table>
 
+    <p *ngIf="!selectedSportKey || !selectedCountryKey">Please select a country and a sport.</p>
+    <p *ngIf="selectedSportKey && selectedCountryKey && !(regions|async)?.length">There are no regions defined for {{ selectedSport.name }} in {{ selectedCountry.name }}.</p>
+  </div>
+
+  <div class="col-sm-12" *ngIf="selectedSportKey && selectedCountryKey">
+    <h3>Add new region</h3>
     <form (ngSubmit)="onSubmit()" #countryForm="ngForm" class="form-inline">
       <div class="form-group">
         <label for="name">Name</label>
@@ -39,7 +46,7 @@
         <label for="code">Description</label>
         <input type="text" class="form-control" name="code" required [(ngModel)]="newRegion.description">
       </div>
-      <button type="submit" class="btn btn-success">Add new region</button>
+      <button type="submit" class="btn btn-success">Add</button>
     </form>
-
+  </div>
 </div>
