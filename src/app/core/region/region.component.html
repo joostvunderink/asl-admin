@@ -18,17 +18,22 @@
 <div class="row" style="margin-top: 20px;">
   <div class="col-sm-12">
     <table class="table table-striped" *ngIf="(regions|async)?.length">
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
 
-        <tr *ngFor="let region of (regions|async)">
-            <td>{{ region.name }}</td>
-            <td>{{ region.description }}</td>
-            <td><a (click)="deleteRegion(region.$key)">Delete</a></td>
-        </tr>
+      <tr *ngFor="let region of (regions|async)">
+        <td>
+          <inline-editor type="text" [(ngModel)]="region.name" (onSave)="saveRegion(region)" name="regionname" size="10"></inline-editor>
+        </td>
+        <td>
+          <inline-editor type="text" [(ngModel)]="region.description" (onSave)="saveRegion(region)" name="regiondescription" size="40"></inline-editor>
+        </td>
+
+        <td><a (click)="deleteRegion(region.$key)">Delete</a></td>
+      </tr>
     </table>
 
     <p *ngIf="!selectedSportKey || !selectedCountryKey">Please select a country and a sport.</p>

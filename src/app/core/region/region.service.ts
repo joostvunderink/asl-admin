@@ -35,6 +35,15 @@ export class RegionService {
         this._db.list('/regions').push(r);
     }
 
+    updateRegion(region: IRegion) {
+        const url = '/regions/' + region.$key;
+        const r = region;
+        delete region.$key;
+        console.log('regionService.updateRegion: ' + url);
+        console.log(r);
+        this._db.object(url).set(r);
+    }
+
     removeRegion(key: string) {
         this._db.object('/regions/' + key).remove();
     }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2/database';
+// import { InlineEditorDirectives } from 'ng2-inline-editor';
 
 import { RegionService }  from './region.service';
 import { SportService }   from '../sport/sport.service';
@@ -69,6 +70,12 @@ export class RegionComponent {
 
     deleteRegion(key: string) {
         this.regionService.removeRegion(key);
+    }
+
+    saveRegion(region) {
+        console.log('saveRegion');
+        console.log(region);
+        this.regionService.updateRegion(region);
     }
 
     onSubmit() {

@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AngularFireModule }         from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { InlineEditorModule }        from 'ng2-inline-editor';
 
 import { CountryService }     from './core/country/country.service';
 import { SportService }       from './core/sport/sport.service';
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    InlineEditorModule,
   ],
   providers: [
     CountryService,
