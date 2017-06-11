@@ -26,13 +26,13 @@
     <table class="table table-striped" *ngIf="(clubs|async)?.length">
         <tr>
             <th>Name</th>
-            <th>Description</th>
+            <th>City</th>
             <th>Actions</th>
         </tr>
 
         <tr *ngFor="let club of (clubs|async)">
             <td>{{ club.name }}</td>
-            <td>{{ club.description }}</td>
+            <td>{{ club.city }}</td>
             <td><a (click)="deleteClub(club.$key)">Delete</a></td>
         </tr>
     </table>
@@ -49,8 +49,8 @@
         <input type="text" class="form-control" name="name" required [(ngModel)]="newClub.name">
       </div>
       <div class="form-group">
-        <label for="code">Description</label>
-        <input type="text" class="form-control" name="code" required [(ngModel)]="newClub.description">
+        <label for="code">City</label>
+        <input type="text" class="form-control" name="code" required [(ngModel)]="newClub.city">
       </div>
       <button type="submit" class="btn btn-success">Add</button>
     </form>

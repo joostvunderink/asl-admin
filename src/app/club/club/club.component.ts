@@ -27,7 +27,7 @@ export class ClubComponent {
     selectedRegion: IRegion;
     selectedRegionKey: string;
 
-    newClub: IClub = { name: '', description: '', $key: '', region_key: '' };
+    newClub: IClub = { name: '', description: '', $key: '', region_key: '', city: '' };
 
     constructor(private sportService: SportService, private countryService: CountryService,
                 private regionService: RegionService, private clubService: ClubService) {
@@ -84,7 +84,7 @@ export class ClubComponent {
             });
         });
         const key = this.selectedRegionKey;
-        console.log('Getting clubs of ' + key);
+        console.log('Getting clubs of region ' + key);
         this.newClub.region_key = key;
         this.clubs = this.clubService.getClubsPerRegion(key);
     }
@@ -96,6 +96,6 @@ export class ClubComponent {
     onSubmit() {
         this.clubService.addClub(this.newClub);
         this.newClub.name = '';
-        this.newClub.description = '';
+        this.newClub.city = '';
     }
 }
